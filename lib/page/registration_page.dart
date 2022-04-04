@@ -6,6 +6,7 @@ import 'package:uts205411203/page/login_screen.dart';
 import 'package:uts205411203/component/color.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({Key? key}) : super(key: key);
@@ -145,12 +146,38 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       } on FirebaseAuthException catch (e) {
                         if (e.code == 'weak-password') {
                           // ignore_for_file: avoid_print
-                          print('The password provided is too weak.');
+                          Fluttertoast.showToast(
+                              msg: "The password provided is too weak",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0
+                          );
+
                         } else if (e.code == 'email-already-in-use') {
-                          print('The account already exists for that email.');
+                          Fluttertoast.showToast(
+                              msg: "email sudah terdaftar",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0
+                          );
+
                         }
                       } catch (e) {
-                        print(e);
+                        Fluttertoast.showToast(
+                            msg: 'Error jaringan',
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            fontSize: 16.0
+                        );
                       }
                     },
                   ),

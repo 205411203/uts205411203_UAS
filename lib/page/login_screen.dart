@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:uts205411203/page/home_page.dart';
 import 'package:uts205411203/component/color.dart';
 import 'package:uts205411203/widget/tabbutton_widget.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 //Halaman Login
 class LoginScreen extends StatefulWidget {
@@ -125,9 +126,26 @@ class _LoginScreenState extends State<LoginScreen> {
                       }on FirebaseAuthException catch (e) {
                         if (e.code == 'user-not-found') {
                           // ignore_for_file: avoid_print
-                          print('Email belum terdaftar');
+                          Fluttertoast.showToast(
+                              msg: "Email belum terdaftar",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0
+                          );
+
                         } else if (e.code == 'wrong-password') {
-                          print('Password salah');
+                          Fluttertoast.showToast(
+                              msg: "Password salah",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0
+                          );
                         }
                       }
 
