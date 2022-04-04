@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:uts205411203/component/color.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 
 //Halaman Homepage
 class HomePage extends StatefulWidget {

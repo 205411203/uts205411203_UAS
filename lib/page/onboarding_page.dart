@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:uts205411203/page/welcome_page.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 //Menampilkan on Boarding Page
 class OnBoardingPage extends StatelessWidget {

@@ -84,7 +84,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ),
               Hero(
                 tag: 'logo',
-                child: Container(
+                child: SizedBox(
                   height: 50.0,
                   child: Image.asset('assets/ebook.png'),
                 ),
@@ -133,15 +133,21 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       });
                       //simpan data dan koneksi ke firebase auth, selanjutnya masuk ke halaman homepage
                       try {
-                        final newUser =
+                        UserCredential newUser =
                         await _auth.createUserWithEmailAndPassword(
                             email: email, password: password);
-                        if (newUser != null) {
                           Navigator.push(
                               context, MaterialPageRoute(builder: (_) => const HomePage()));
                           setState(() {
                             showSpinner = false;
                           });
+                          return newUser;
+                      } on FirebaseAuthException catch (e) {
+                        if (e.code == 'weak-password') {
+                          // ignore_for_file: avoid_print
+                          print('The password provided is too weak.');
+                        } else if (e.code == 'email-already-in-use') {
+                          print('The account already exists for that email.');
                         }
                       } catch (e) {
                         print(e);
@@ -167,7 +173,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   TextButton(
                     onPressed: () {
                       Navigator.push(context, PageTransition(
-                          type: PageTransitionType.leftToRight, child: LoginScreen()));
+                          type: PageTransitionType.leftToRight, child: const LoginScreen()));
                     },
                     child: Text(
                       " Log In",

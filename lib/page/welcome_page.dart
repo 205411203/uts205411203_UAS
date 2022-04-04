@@ -102,7 +102,7 @@ class _WelcomePageState extends State<WelcomePage>
 
                     btnFunction: () {
                       Navigator.push(context, PageTransition(
-                          type: PageTransitionType.leftToRight, child: LoginScreen()));
+                          type: PageTransitionType.leftToRight, child: const LoginScreen()));
                     },
                   ),
                 ),

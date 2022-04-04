@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:uts205411203/page/home_page.dart';
 import 'package:uts205411203/component/color.dart';
 import 'package:uts205411203/widget/tabbutton_widget.dart';
-import 'package:page_transition/page_transition.dart';
 
 //Halaman Login
 class LoginScreen extends StatefulWidget {
@@ -76,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               Hero(
                 tag: 'logo',
-                child: Container(
+                child: SizedBox(
                   height: 100.0,
                   child: Image.asset('assets/ebook.png'),
                 ),
@@ -116,17 +115,20 @@ class _LoginScreenState extends State<LoginScreen> {
                       //jika email dan password sesuai dengan data firebase, lanjut pada CRUD ebook pada home_page
 
                       try{
-                        final loggedInUser = await _auth.signInWithEmailAndPassword(email: email, password: password);
-                        if(loggedInUser != null){
+                        UserCredential loggedInUser = await _auth.signInWithEmailAndPassword(email: email, password: password);
                           Navigator.push(
                               context, MaterialPageRoute(builder: (_) => const HomePage()));
                           setState(() {
                             // showSpinner = false;
                           });
-
+                          return loggedInUser;
+                      }on FirebaseAuthException catch (e) {
+                        if (e.code == 'user-not-found') {
+                          // ignore_for_file: avoid_print
+                          print('Email belum terdaftar');
+                        } else if (e.code == 'wrong-password') {
+                          print('Password salah');
                         }
-                      }catch(e){
-                        print(e);
                       }
 
                     },
