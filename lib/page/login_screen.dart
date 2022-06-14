@@ -1,9 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:uts205411203/page/home_page.dart';
+import 'package:uts205411203/movie/pages/home/home.dart';
 import 'package:uts205411203/component/color.dart';
+import 'package:uts205411203/page/registration_page.dart';
 import 'package:uts205411203/widget/tabbutton_widget.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+import '../movie/pages/home/home.dart';
 
 //Halaman Login
 class LoginScreen extends StatefulWidget {
@@ -62,23 +65,22 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: Colors.blueAccent,
         extendBodyBehindAppBar: true,
         appBar: AppBar(
-          title: const Text("Login"),
+          title: const Text("Login Pustaka Film"),
           centerTitle: true,
-          backgroundColor: Colors.blueAccent,
-          elevation: 0.0,
+          backgroundColor: Colors.lightBlueAccent,
+          elevation: 3.0,
         ),
         body: SafeArea(
           child: ListView(
-
             children: <Widget>[
               const SizedBox(
-                height: 70.0,
+                height: 50.0,
               ),
               Hero(
                 tag: 'logo',
                 child: SizedBox(
-                  height: 100.0,
-                  child: Image.asset('assets/ebook.png'),
+                  height: 150.0,
+                  child: Image.asset('assets/movies.png'),
                 ),
               ),
               const SizedBox(
@@ -113,12 +115,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         // showSpinner = true;
                       });
 
-                      //jika email dan password sesuai dengan data firebase, lanjut pada CRUD ebook pada home_page
+                      //jika email dan password sesuai dengan data firebase, lanjut pada home_page
 
                       try{
                         UserCredential loggedInUser = await _auth.signInWithEmailAndPassword(email: email, password: password);
                           Navigator.push(
-                              context, MaterialPageRoute(builder: (_) => const HomePage()));
+                              context, MaterialPageRoute(builder: (_) => Home()));
                           setState(() {
                             // showSpinner = false;
                           });
@@ -153,6 +155,29 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
+              const SizedBox(
+                height: 5.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
+                child: Hero(
+                  tag: "button3",
+                  child: TabButton(
+                    btnColor: PalletteColors.primaryRed,
+                    btnTxtColor: Colors.white,
+                    btnText: "Register",
+                    btnFunction: () async {
+                      Navigator.push(
+                          context, MaterialPageRoute(builder: (_) => RegistrationPage()));
+                      setState((){
+                        // showSpinner = true;
+                      });
+
+                    },
+                  ),
+                ),
+              ),
+
 
             ],
           ),
@@ -164,6 +189,8 @@ class _LoginScreenState extends State<LoginScreen> {
   // widget untuk entry field email
   Widget emailInput() {
     return Theme(
+      data: Theme.of(context)
+          .copyWith(colorScheme: ColorScheme.fromSwatch().copyWith(secondary: PalletteColors.primaryRed),),
       child: TextField(
         onChanged: (value){
           email = value;
@@ -211,12 +238,8 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         )
         ,
-
-
         textInputAction: TextInputAction.next,
       ),
-      data: Theme.of(context)
-          .copyWith(colorScheme: ColorScheme.fromSwatch().copyWith(secondary: PalletteColors.primaryRed),),
     );
   }
 
