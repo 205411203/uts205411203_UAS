@@ -1,6 +1,6 @@
 # uts205411203
 
-Tugas UTS Framework Mobile UTDI untuk Framework Mobile semester Genap 2022 NIM : 205411203 
+Tugas UAS Lanjutan dari Tugas UTS Framework Mobile UTDI untuk Framework Mobile semester Genap 2022 NIM : 205411203 
 
 ## Getting Started
 
@@ -19,19 +19,23 @@ Keterangan Project
 
 Project ini mengambil referensi dan source dari flutterawesome dan beberapa repo github. Terdiri dari : 
 1. Halaman On Boarding
-2. Halaman Welcome
-3. Halaman Register, menggunakan firebase auth
-4. Halaman Login, autentifikasi menggunakan firebase
-5. Halaman CRUD, menghubungkan ke firestore berisi data judul, ringkasan dan pengarang buku
+2. Halaman Login dan Registrasi, menggunakan firebase auth
+3. Halaman Dashboard Pustaka Film yang diambil dari Imdb API,berisi daftar referensi film berdasar genre, popular film dan pencarian film.
 
 Widget yang digunakan :
 1. Widget Image untuk menampilkan gambar.
 2. Widget AppBar untuk menampilkan navigasi/penunjuk pada aplikasi
 3. Widget Text untuk menampilkan text
-4. Widget container sebagai parent container dari widget-widget dibawahnya, berguna untuk mengatur tata letak widget-widget tersebut.
+4. Widget Container sebagai parent container dari widget-widget dibawahnya, berguna untuk mengatur tata letak widget-widget tersebut.
 5. Widget Textfield untuk menghandle inputan/entry text
+6. Sized Box
 
-<img src="https://drive.google.com/uc?export=view&id=1wdO9N720gdW1METP7INo0Ec5e43fz6Qk" width="65%" height="100%">
+Fitur yang ada :
+1. Login/Register/Logout menggunakan Firebase Auth
+2. Floating App Bar
+3. Dashboard
+4. Fetch data dari API Imdb menggunakan Provider dan Http.
+
 
 
 
